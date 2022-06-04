@@ -8,6 +8,8 @@ import Loader from "../../ui/Loader";
 import { NotificationSuccess, NotificationError } from "../../ui/Notifications";
 import {
   getNfts,
+  buyImage,
+  sellImage,
   createNft,
   fetchNftContractOwner,
   transferOwnership,
@@ -54,7 +56,28 @@ const NftList = ({ minterContract, name }) => {
       setLoading(false);
     }
   };
-
+  const buyNft = async (index, tokenId) => {
+    try {
+      setLoading(true);
+      await buyImage(minterContract, index, tokenId, performActions);
+      getAssets();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const sellNft = async (index) => {
+    try {
+      setLoading(true);
+      await sellImage(minterContract, index, performActions);
+      getAssets();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   const sendNft = async (address, tokenId, owner)=>{
     try {
       setLoading(true);
@@ -102,6 +125,8 @@ const NftList = ({ minterContract, name }) => {
                 <Nft
                   key={_nft.index}
                   contractOwner = {defaultAccount}
+                  buyNft={() => buyNft(_nft.index, _nft.tokenId)}
+                  sellNft={() => sellNft(_nft.tokenId)}
                   send = {sendNft}
                   nft={{
                     ..._nft,

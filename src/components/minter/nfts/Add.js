@@ -13,6 +13,7 @@ const AddNfts = ({ save, address }) => {
   const [name, setName] = useState("");
   const [ipfsImage, setIpfsImage] = useState("");
   const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("")
 
   //store attributes of an NFT
   // const [attributes, setAttributes] = useState([]);
@@ -109,6 +110,20 @@ const AddNfts = ({ save, address }) => {
               />
             </FloatingLabel>
 
+            <FloatingLabel
+              controlId="inputLocation"
+              label="Price"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                placeholder="Price of NFT"
+                onChange={(e) => {
+                  setPrice(e.target.value);
+                }}
+              />
+            </FloatingLabel>
+
             <Form.Control
               type="file"
               className={"mb-3"}
@@ -193,6 +208,7 @@ const AddNfts = ({ save, address }) => {
             onClick={() => {
               save({
                 name,
+                price,
                 ipfsImage,
                 description,
                 ownerAddress: address

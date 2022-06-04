@@ -5,14 +5,17 @@ import { truncateAddress } from "../../../utils";
 import { Form, Button } from "react-bootstrap";
 import Identicon from "../../ui/Identicon";
 
-const NftCard = ({ nft, send, contractOwner }) => {
-  const { image, description, owner, name, index, attributes } = nft;
+const NftCard = ({ nft, send, contractOwner, buyNft, sellNft }) => {
+  const { image, description, owner, name, index, price, attributes, sold } = nft;
 
   const handleSend = (index, owner) => {
     if (!sendAddrss) return;
     send(sendAddrss, index, owner);
   };
   const [sendAddrss, setSendAddrss] = useState("");
+  {
+    console.log(sold);
+  }
   return (
     <Col key={index}>
       <Card className=" h-100">
@@ -23,7 +26,7 @@ const NftCard = ({ nft, send, contractOwner }) => {
               {truncateAddress(owner)}
             </span>
             <Badge bg="secondary" className="ms-auto">
-              {index} ID
+              {price / 10 ** 18} CELO
             </Badge>
           </Stack>
         </Card.Header>
@@ -68,6 +71,20 @@ const NftCard = ({ nft, send, contractOwner }) => {
                 Send
               </Button>
             </>
+              )}
+
+            {!sold ? (
+              <Button variant="secondary" onClick={buyNft}>
+                Buy
+              </Button>
+            ) : contractOwner === owner ? (
+              <Button variant="danger" onClick={sellNft}>
+                Sell
+              </Button>
+            ) : (
+              <Button variant="danger" disabled>
+              Sold
+              </Button>
           )}
         </Card.Body>
       </Card>

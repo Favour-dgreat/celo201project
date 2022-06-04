@@ -13,11 +13,7 @@ import "./App.css";
 import { Container, Nav } from "react-bootstrap";
 
 const App = function AppWrapper() {
-  /*
-    address : fetch the connected wallet address
-    destroy: terminate connection to user wallet
-    connect : connect to the celo blockchain
-     */
+  
   const { address, destroy, connect } = useContractKit();
 
   //  fetch user's celo balance using hook
@@ -53,8 +49,7 @@ const App = function AppWrapper() {
           </main>
         </Container>
       ) : (
-        //  if user wallet is not connected display cover page
-        <Cover name="Give them a SMILE Collection" coverDescription ="This project is with the idea to donate to indigent kids through an NFT Collection" backgroundImg={"https://i.ibb.co/QKYXJFG/smile.png"} coverImg={"https://i.ibb.co/QKYXJFG/smile.png"} connect={connect} />
+        <Cover name="Give them a SMILE Collection" coverDescription ="This project is with the idea to donate to indigent kids through an NFT Collection" coverImg={"https://i.ibb.co/QKYXJFG/smile.png"} connect={connect} />
       )}
     </>
   );
