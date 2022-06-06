@@ -4,4 +4,4 @@ import GtasNFTContractAddress from '../contracts/GtasNFT-address.json';
 
 
 // export interface for NFT contract
-export const useMinterContract = () => useContract(GtasNFTAbi.abi, GtasNFTContractAddress.GtasNFT);
+export const useMinterContract = () => useContract(GtasNFTAbi.abi, GtasNFTContractAddress.GTASNFT);

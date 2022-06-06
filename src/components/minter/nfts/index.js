@@ -26,20 +26,6 @@ const NftList = ({ minterContract, name }) => {
   const [loading, setLoading] = useState(false);
   const [nftOwner, setNftOwner] = useState(null);
   const  {defaultAccount} = kit;
-  const getAssets = useCallback(async () => {
-    try {
-      setLoading(true);
-
-      // fetch all nfts from the smart contract
-      const allNfts = await getNfts(minterContract);
-      if (!allNfts) return;
-      setNfts(allNfts);
-    } catch (error) {
-      console.log({ error });
-    } finally {
-      setLoading(false);
-    }
-  }, [minterContract]);
 
   const addNft = async (data) => {
     try {
@@ -98,6 +84,24 @@ const NftList = ({ minterContract, name }) => {
     setNftOwner(_address);
   }, []);
 
+  const getAssets = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      // fetch all nfts from the smart contract
+      const allNfts = await getNfts(minterContract);
+      if (!allNfts) return;
+
+
+      setNfts(allNfts);
+    } catch (error) {
+      console.log({ error });
+    } finally {
+      setLoading(false);
+    }
+  }, [minterContract]);
+
+
   useEffect(() => {
     try {
       if (address && minterContract) {
@@ -108,6 +112,7 @@ const NftList = ({ minterContract, name }) => {
       console.log({ error });
     }
   }, [minterContract, address, getAssets, fetchContractOwner]);
+
   if (address) {
     return (
       <>
@@ -119,7 +124,7 @@ const NftList = ({ minterContract, name }) => {
               <AddNfts save={addNft} address={address} />
             </div>
             <Row xs={1} sm={2} lg={3} className="g-3  mb-5 g-xl-4 g-xxl-5">
-          
+
               {/* display all NFTs */}
               {nfts.map((_nft) => (
                 <Nft

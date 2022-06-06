@@ -40,7 +40,7 @@ const NftCard = ({ nft, send, contractOwner, buyNft, sellNft }) => {
           <Card.Text className="flex-grow-1">{description}</Card.Text>
           <div>
             <Row className="mt-2">
-              {attributes.map((attribute, key) => (
+              {attributes?.map((attribute, key) => (
                 <Col key={key}>
                   <div className="border rounded bg-light">
                     <div className="text-secondary fw-lighter small text-capitalize">

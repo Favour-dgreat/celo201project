@@ -27,6 +27,7 @@ contract GTASNFT is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable {
 
     mapping(uint256 => Image) private images;
 
+//    mint an NFt
     function safeMint(string memory uri, uint256 price)
         public
         payable
